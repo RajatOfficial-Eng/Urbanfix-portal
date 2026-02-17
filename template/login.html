@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | UrbanFix Portal</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+</nav>
+
+<section class="login-section">
+<div class="login-card">
+
+<h2>Portal Login</h2>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>alert("{{ messages[0] }}");</script>
+  {% endif %}
+{% endwith %}
+
+<form action="/login" method="POST">
+
+<div class="form-group">
+<label>Select Role</label>
+<select id="roleSelect" name="role" required>
+<option value="Citizen">Citizen</option>
+<option value="Officer">Officer</option>
+<option value="Admin">Admin</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="text" name="email" required>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" name="password" required>
+</div>
+
+<button type="submit" class="submit-btn">Login</button>
+
+</form>
+
+<div id="signup-box" style="display:none; text-align:center; margin-top:15px;">
+<p>New citizen?</p>
+<a href="/signup" class="action-btn">Create Citizen Account</a>
+</div>
+
+</div>
+</section>
+
+<script>
+const roleSelect = document.getElementById("roleSelect");
+const signupBox = document.getElementById("signup-box");
+
+function toggleSignup(){
+  signupBox.style.display =
+    roleSelect.value === "Citizen" ? "block" : "none";
+}
+
+roleSelect.addEventListener("change", toggleSignup);
+toggleSignup();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pollution Control Board | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>🌫 Pollution Control Board</h1>
+  <p>Monitoring and control of air, water, and noise pollution</p>
+</section>
+
+<!-- ABOUT -->
+<section class="admin-section">
+  <h2>About the Department</h2>
+  <p>
+    The Pollution Control Board is responsible for monitoring environmental quality
+    and enforcing pollution control regulations. The department addresses complaints
+    related to air pollution, water contamination, industrial emissions, and excessive
+    noise to protect public health and the environment.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section class="admin-section">
+  <h2>Services & Responsibilities</h2>
+  <ul class="dept-list">
+    <li>Monitoring air quality and emissions</li>
+    <li>Water pollution control and inspection</li>
+    <li>Noise pollution regulation and enforcement</li>
+    <li>Industrial pollution compliance checks</li>
+    <li>Environmental awareness and reporting</li>
+  </ul>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Total Complaints</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Resolved</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>In Progress</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Pending</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="admin-section">
+  <h2>Department Contact Details</h2>
+
+  <table class="admin-table">
+    <tr>
+      <th>Chairperson</th>
+      <td>Dr. K. Rao</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>pollutioncontrol@gov.in</td>
+    </tr>
+    <tr>
+      <th>Helpline</th>
+      <td>1800-110-456</td>
+    </tr>
+    <tr>
+      <th>Office Hours</th>
+      <td>Monday – Friday, 10:00 AM – 5:00 PM</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ACTION -->
+<section class="admin-section">
+  <a href="/register?type=pollution" class="action-btn">
+    Register a Pollution Complaint
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

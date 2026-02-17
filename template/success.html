@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complaint Registered | UrbanFix</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/">Home</a>
+  <a href="/track">Track Status</a>
+</nav>
+
+<section class="success-container">
+
+  <div class="success-header">
+    <h1>✅ Complaint Registered Successfully</h1>
+    <p>Please save your complaint reference number</p>
+  </div>
+
+  <div class="complaint-id-box">
+    <div class="complaint-id">
+      Complaint ID <span>{{ complaint_id }}</span>
+    </div>
+
+    <div class="success-actions">
+      <a href="/pdf/{{ complaint_id }}" class="download-btn">
+        Download Acknowledgment PDF
+      </a>
+      <a href="/" class="home-btn">
+        Go to Home
+      </a>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>

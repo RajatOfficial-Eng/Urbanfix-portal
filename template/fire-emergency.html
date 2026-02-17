@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fire & Emergency Services | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>🔥 Fire & Emergency Services</h1>
+  <p>Fire safety, emergency response, and disaster management</p>
+</section>
+
+<!-- ABOUT -->
+<section class="admin-section">
+  <h2>About the Department</h2>
+  <p>
+    Fire & Emergency Services are responsible for responding to fire incidents,
+    rescue operations, disaster management, and public safety emergencies.
+    The department operates round-the-clock to protect life, property, and
+    critical infrastructure across the city.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section class="admin-section">
+  <h2>Services & Responsibilities</h2>
+  <ul class="dept-list">
+    <li>Fire emergency response and rescue operations</li>
+    <li>Fire safety inspections of buildings</li>
+    <li>Emergency medical assistance coordination</li>
+    <li>Disaster response and evacuation support</li>
+    <li>Fire safety awareness and training programs</li>
+  </ul>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Total Incidents Reported</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Resolved</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>In Progress</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Critical Pending</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="admin-section">
+  <h2>Department Contact Details</h2>
+
+  <table class="admin-table">
+    <tr>
+      <th>Chief Fire Officer</th>
+      <td>Mr. A. Mehta</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>fire@gov.in</td>
+    </tr>
+    <tr>
+      <th>Emergency Helpline</th>
+      <td><strong>1800-111-222</strong></td>
+    </tr>
+    <tr>
+      <th>Office Hours</th>
+      <td>24×7 Emergency Services</td>
+    </tr>
+  </table>
+</section>
+
+<!-- EMERGENCY NOTICE -->
+<section class="admin-section">
+  <div class="alert-box">
+    🚨 In case of fire or life-threatening emergency, call <strong>101</strong> immediately.
+  </div>
+</section>
+
+<!-- ACTION -->
+<section class="admin-section">
+  <a href="/register?type=fire" class="action-btn">
+    Report a Fire / Emergency Issue
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

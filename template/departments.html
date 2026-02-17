@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Departments | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<div id="deptModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeDept()">&times;</span>
+    <h2 id="deptTitle"></h2>
+    <p id="deptDesc"></p>
+    <ul id="deptInfo"></ul>
+  </div>
+</div>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/admin">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Government Departments</h1>
+  <p>Responsible authorities handling civic complaints</p>
+</section>
+
+<!-- DEPARTMENTS GRID -->
+<section class="departments-section">
+  <div class="dept-grid">
+
+    <a href="/public-works" class="dept-card">
+      <h3>🏗 Public Works Department</h3>
+      <p>Roads, bridges, potholes & infrastructure</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/water-supply" class="dept-card">
+      <h3>🚰 Water Supply Department</h3>
+      <p>Water leakage, pipeline & supply issues</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/electricity" class="dept-card">
+      <h3>💡 Electricity Department</h3>
+      <p>Street lights & power-related issues</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/sanitation" class="dept-card">
+      <h3>🗑 Municipal Sanitation</h3>
+      <p>Garbage, waste collection & cleanliness</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/traffic" class="dept-card">
+      <h3>🚦 Traffic Police Department</h3>
+      <p>Traffic signals, congestion & violations</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/fire-emergency" class="dept-card">
+      <h3>🔥 Fire & Emergency Services</h3>
+      <p>Fire hazards & emergency response</p>
+      <span class="count critical">High Priority: 0</span>
+    </a>
+
+    <a href="/animal-control" class="dept-card">
+      <h3>🐕 Animal Control Department</h3>
+      <p>Stray animals & public safety</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/pollution-control" class="dept-card">
+      <h3>🌫 Pollution Control Board</h3>
+      <p>Air, water & noise pollution issues</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+    <a href="/public-grievance" class="dept-card">
+      <h3>📄 Public Grievance Cell</h3>
+      <p>General civic & administrative complaints</p>
+      <span class="count">Active Complaints: 0</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

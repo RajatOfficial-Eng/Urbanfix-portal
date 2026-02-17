@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/admin">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Smart Urban Complaint Management System</h1>
+  <p>Government of Smart City Initiative</p>
+  <div class="hero-buttons">
+    <a href="/register"><button>📢 Register Complaint</button></a>
+    <a href="/track"><button class="outline">📍 Track Complaint</button></a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>{{ total }}</h2>
+    <p>Total Complaints</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ resolved }}</h2>
+    <p>Resolved</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ critical }}</h2>
+    <p>Critical Issues</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ rate }}%</h2>
+    <p>Resolution Rate</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services">
+  <h2>Citizen Services</h2>
+  <p class="service-subtitle">
+    Access essential urban services and report civic issues directly to concerned departments
+  </p>
+
+  <div class="service-grid">
+
+    <!-- Infrastructure -->
+    <a href="/register?type=road" class="service-card">🚧 Road & Pothole Complaints</a>
+    <a href="/register?type=construction" class="service-card">🏗 Illegal Construction</a>
+    <a href="/register?type=water" class="service-card">🚰 Water Supply & Leakage</a>
+    <a href="/register?type=light" class="service-card">💡 Street Light Maintenance</a>
+
+    <!-- Sanitation -->
+    <a href="/register?type=garbage" class="service-card">🗑 Garbage Collection</a>
+    <a href="/register?type=toilet" class="service-card">🚽 Public Toilet Maintenance</a>
+    <a href="/register?type=animal" class="service-card">🐕 Stray Animal Issues</a>
+
+    <!-- Transport -->
+    <a href="/register?type=traffic" class="service-card">🚦 Traffic Signal Malfunction</a>
+    <a href="/register?type=transport" class="service-card">🚌 Public Transport Complaints</a>
+    <a href="/register?type=parking" class="service-card">🅿 Illegal Parking</a>
+
+    <!-- Safety & Environment -->
+    <a href="/register?type=fire" class="service-card">🔥 Fire Safety Hazards</a>
+    <a href="/register?type=tree" class="service-card">🌳 Tree Fall / Pruning Request</a>
+    <a href="/register?type=pollution" class="service-card">🌫 Air & Noise Pollution</a>
+
+    <!-- Governance -->
+    <a href="/register?type=grievance" class="service-card">📄 Public Grievance Redressal</a>
+    <a href="/departments" class="service-card">🏛 Ward Office Services</a>
+    <a href="/notices" class="service-card">📍 Smart City Feedback</a>
+
+  </div>
+</section>
+
+
+<!-- PRIORITY DASHBOARD -->
+<section class="dashboard">
+  <h2>Live Priority Issues</h2>
+
+  {% for issue in live_issues %}
+  <div class="card {{ get_priority(issue.category) }}">
+    <h3>{{ issue.category | title }} Issue</h3>
+    <p>{{ issue.area or "Location not specified" }}</p>
+    <span class="badge">
+      {{ get_priority(issue.category) | title }}
+    </span>
+  </div>
+  {% else %}
+  <p>No active issues at the moment.</p>
+  {% endfor %}
+</section>
+
+<!-- NOTICE BOARD -->
+<section class="notices">
+  <h2>📄 Public Notices</h2>
+  <ul>
+    <li>✔ New complaint resolution policy updated</li>
+    <li>✔ Water supply maintenance on 20 Jan</li>
+    <li>✔ Smart City survey open for citizens</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+  <p>Helpline: 1800-XXX-XXXX</p>
+</footer>
+
+</body>
+</html>

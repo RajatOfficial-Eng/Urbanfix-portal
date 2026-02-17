@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/admin">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/admin">Home</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Administrator Dashboard</h1>
+  <p>Authorized access – Municipal Administration</p>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>{{ total }}</h2>
+    <p>Total Complaints</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ resolved }}</h2>
+    <p>Resolved</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ critical }}</h2>
+    <p>Critical Issues</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ rate }}%</h2>
+    <p>Resolution Rate</p>
+  </div>
+</section>
+
+<!-- PRIORITY OVERVIEW -->
+<section class="admin-section">
+  <h2>Priority Overview</h2>
+
+  <table class="admin-table">
+    <tr>
+      <th>Priority</th>
+      <th>Complaints</th>
+      <th>Average Resolution Time</th>
+    </tr>
+    <tr>
+      <td class="critical-text">Critical</td>
+      <td>{{ critical_count }}</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="high-text">High</td>
+      <td>{{ high_count }}</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="medium-text">Medium</td>
+      <td>{{ medium_count }}</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="low-text">Low</td>
+      <td>{{ low_count }}</td>
+      <td>—</td>
+    </tr>
+  </table>
+</section>
+
+<!-- DEPARTMENT LOAD -->
+<section class="admin-section">
+  <h2>Department Workload</h2>
+
+  <table class="admin-table">
+    <tr>
+      <th>Department</th>
+      <th>Active Complaints</th>
+      <th>Status</th>
+    </tr>
+
+    <tr>
+      <td>Public Works Department</td>
+      <td>{{ dept_workload["Public Works Department"] }}</td>
+      <td>Active</td>
+    </tr>
+
+    <tr>
+      <td>Water Supply Department</td>
+      <td>{{ dept_workload["Water Supply Department"] }}</td>
+      <td>Active</td>
+    </tr>
+
+    <tr>
+      <td>Municipal Sanitation</td>
+      <td>{{ dept_workload["Municipal Sanitation"] }}</td>
+      <td>Active</td>
+    </tr>
+
+    <tr>
+      <td>Electricity Department</td>
+      <td>{{ dept_workload["Electricity Department"] }}</td>
+      <td>Active</td>
+    </tr>
+
+    <tr>
+      <td>Fire & Emergency</td>
+      <td>{{ dept_workload["Fire & Emergency"] }}</td>
+      <td>Active</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ADMIN ACTIONS -->
+<section class="admin-section">
+  <h2>Administrative Actions</h2>
+  <div class="admin-actions">
+    <a href="/assign" class="action-btn">Assign Complaints</a>
+    <a href="/update-status" class="action-btn">Update Status</a>
+    <a href="/reports" class="action-btn">Generate Reports</a>
+    <a href="/manage-departments" class="action-btn">Manage Departments</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Authorized Government Use Only | Government of India</p>
+</footer>
+
+</body>
+</html>

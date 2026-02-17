@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reports | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/admin">Dashboard</a></li>
+    <li><a href="/assign">Assign Complaints</a></li>
+    <li><a href="/update-status">Update Status</a></li>
+    <li><a href="/reports" class="active">Reports</a></li>
+    <li><a href="/manage-departments">Manage Departments</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Administrative Reports</h1>
+  <p>Complaint analytics and performance summaries</p>
+</section>
+
+<!-- ================= COMPLAINT TABLE ================= -->
+<section class="admin-section">
+  <h2>Complaint Reports</h2>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Complaint ID</th>
+        <th>Category</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Department</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for c in complaints %}
+      <tr>
+        <td>{{ c.complaint_id }}</td>
+        <td>{{ c.category }}</td>
+        <td>{{ c.priority }}</td>
+        <td>{{ c.status }}</td>
+        <td>{{ c.assigned_department or "Not Assigned" }}</td>
+        <td>{{ c.created_at.strftime('%d-%m-%Y') }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="6" style="text-align:center;">No Data Available</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= SUMMARY CARDS ================= -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>{{ total }}</h2>
+    <p>Total Complaints</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ resolved }}</h2>
+    <p>Resolved</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ in_progress }}</h2>
+    <p>In Progress</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>{{ critical_pending }}</h2>
+    <p>Critical Pending</p>
+  </div>
+</section>
+
+<!-- ================= DEPARTMENT ANALYTICS ================= -->
+<section class="admin-section">
+  <h2>Department Performance</h2>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Department</th>
+        <th>Total</th>
+        <th>Resolved</th>
+        <th>In Progress</th>
+        <th>Pending</th>
+        <th>Avg Resolution Time</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for d in dept_stats %}
+      <tr>
+        <td>{{ d.name }}</td>
+        <td>{{ d.total }}</td>
+        <td>{{ d.resolved }}</td>
+        <td>{{ d.in_progress }}</td>
+        <td>{{ d.pending }}</td>
+        <td>{{ d.avg_time }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<!-- ================= EXPORT BUTTONS ================= -->
+<section class="admin-section">
+  <h2>Export Reports</h2>
+
+  <div class="admin-actions">
+    <a href="/export-pdf" class="action-btn">Download PDF</a>
+
+    <a href="/export-excel" class="action-btn">Download Excel</a>
+
+    <button onclick="window.print()" class="action-btn">
+      Print Report
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Authorized Government Use Only</p>
+</footer>
+
+</body>
+</html>

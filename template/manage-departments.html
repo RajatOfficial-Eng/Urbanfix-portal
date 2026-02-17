@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manage Departments | UrbanFix Portal</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+
+  <ul>
+    <li><a href="/admin">Dashboard</a></li>
+    <li><a href="/assign">Assign Complaints</a></li>
+    <li><a href="/update-status">Update Status</a></li>
+    <li><a href="/reports">Reports</a></li>
+    <li><a href="/manage-departments" class="active">Manage Departments</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Manage Departments</h1>
+  <p>Configure departments, officers, and operational status</p>
+</section>
+
+<!-- ========================= -->
+<!-- 🔥 DEPARTMENT LIST (DYNAMIC) -->
+<!-- ========================= -->
+<section class="admin-section">
+
+<table class="admin-table">
+
+<thead>
+<tr>
+  <th>Department Name</th>
+  <th>Head Officer</th>
+  <th>Contact</th>
+  <th>Active Complaints</th>
+  <th>Status</th>
+  <th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for d in departments %}
+<tr>
+
+  <td>{{ d.name }}</td>
+  <td>{{ d.officer }}</td>
+  <td>{{ d.email }}</td>
+  <td>{{ d.active }}</td>
+
+  <td class="
+      {% if d.active > 120 %}
+        critical-text
+      {% elif d.status == 'Inactive' %}
+        low-text
+      {% endif %}
+  ">
+    {{ d.status }}
+  </td>
+
+  <td>
+    <button class="action-btn small">Edit</button>
+  </td>
+
+</tr>
+
+{% else %}
+<tr>
+<td colspan="6" style="text-align:center;">
+No departments added yet
+</td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+</section>
+
+<!-- ========================= -->
+<!-- ➕ ADD NEW DEPARTMENT -->
+<!-- ========================= -->
+<section class="admin-section">
+
+<h2>Add New Department</h2>
+
+<form class="complaint-form" method="POST">
+
+<div class="form-row">
+
+  <div class="form-group">
+    <label>Department Name</label>
+    <input type="text" name="name" placeholder="Enter department name" required>
+  </div>
+
+  <div class="form-group">
+    <label>Head Officer</label>
+    <input type="text" name="officer" placeholder="Officer name" required>
+  </div>
+
+</div>
+
+<div class="form-row">
+
+  <div class="form-group">
+    <label>Contact Email</label>
+    <input type="email" name="email" placeholder="official@gov.in" required>
+  </div>
+
+  <div class="form-group">
+    <label>Status</label>
+    <select name="status">
+      <option>Active</option>
+      <option>Inactive</option>
+    </select>
+  </div>
+
+</div>
+
+<button type="submit" class="action-btn">
+Add Department
+</button>
+
+</form>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+<p>© 2026 UrbanFix Portal | Authorized Government Use Only | Government of India</p>
+</footer>
+
+</body>
+</html>

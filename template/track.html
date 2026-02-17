@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Track Complaint | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/">Home</a>
+  <a href="/track" class="active">Track Status</a>
+</nav>
+
+<section class="page-header">
+  <h1>Track Complaint Status</h1>
+  <p>Enter your complaint reference ID</p>
+</section>
+
+<section class="form-section">
+
+  <form method="post" class="complaint-form">
+    <div class="form-group">
+      <label>Complaint ID</label>
+      <input type="text" name="complaint_id" required placeholder="e.g. UFX123456">
+    </div>
+
+    <button type="submit" class="submit-btn">Track Status</button>
+  </form>
+
+  {% if data %}
+    <div class="success-container" style="margin-top:40px;">
+      <h3>📄 Complaint Details</h3>
+
+      <p><strong>Complaint ID:</strong> {{ data.complaint_id }}</p>
+      <p><strong>Name:</strong> {{ data.name }}</p>
+      <p><strong>Category:</strong> {{ data.category }}</p>
+      <p><strong>Type:</strong> {{ data.complaint_type }}</p>
+      <p><strong>Status:</strong> {{ data.status }}</p>
+      <p><strong>Submitted On:</strong> {{ data.created_at.strftime('%d-%m-%Y %H:%M') }}</p>
+    </div>
+
+  {% elif request.method == 'POST' %}
+    <p style="color:red; margin-top:20px;">
+      ❌ No complaint found with this ID.
+    </p>
+  {% endif %}
+
+  {% if data %}
+  <h3>Status Timeline</h3>
+
+  <ul class="timeline">
+    <li class="{{ 'done' if data.status in ['Registered','Assigned','In Progress','Resolved'] }}">Registered</li>
+    <li class="{{ 'done' if data.assigned_at }}">Assigned</li>
+    <li class="{{ 'done' if data.in_progress_at }}">In Progress</li>
+    <li class="{{ 'done' if data.resolved_at }}">Resolved</li>
+  </ul>
+  {% endif %}
+
+
+</section>
+
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Public Works Department | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>🏗 Public Works Department</h1>
+  <p>Infrastructure development and maintenance services</p>
+</section>
+
+<!-- ABOUT -->
+<section class="admin-section">
+  <h2>About the Department</h2>
+  <p>
+    The Public Works Department (PWD) is responsible for planning, construction,
+    and maintenance of public infrastructure such as roads, bridges, flyovers,
+    footpaths, and government buildings to ensure safe and efficient urban mobility.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section class="admin-section">
+  <h2>Services & Responsibilities</h2>
+  <ul class="dept-list">
+    <li>Road construction and maintenance</li>
+    <li>Pothole detection and repair</li>
+    <li>Bridge and flyover inspection</li>
+    <li>Footpath and pavement repairs</li>
+    <li>Emergency infrastructure restoration</li>
+  </ul>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Total Complaints</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Resolved</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>In Progress</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Pending</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="admin-section">
+  <h2>Department Contact Details</h2>
+
+  <table class="admin-table">
+    <tr>
+      <th>Head Officer</th>
+      <td>Mr. R. Sharma</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>pwd@gov.in</td>
+    </tr>
+    <tr>
+      <th>Helpline</th>
+      <td>1800-180-1234</td>
+    </tr>
+    <tr>
+      <th>Office Hours</th>
+      <td>Monday – Friday, 10:00 AM – 5:00 PM</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ACTION -->
+<section class="admin-section">
+  <a href="/register?type=road" class="action-btn">
+    Register a Public Works Complaint
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

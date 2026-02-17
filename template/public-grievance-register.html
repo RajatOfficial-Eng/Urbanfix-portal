@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Public Grievance | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>📄 Register a Public Grievance</h1>
+  <p>For administrative, service-related, or inter-departmental issues</p>
+</section>
+
+<!-- FORM -->
+<section class="form-section">
+  <form class="complaint-form">
+
+    <h3>👤 Applicant Details</h3>
+
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" name="name" placeholder="Enter your full name" required>
+      <input type="tel" name="mobile" placeholder="10-digit mobile number" required>
+      <input type="email" name="email" placeholder="Enter your email address">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label> Alternate Mobile Number</label>
+        <input type="tel" name="mobile" placeholder="Alternate Mobile Number" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="example@email.com">
+      </div>
+    </div>
+
+    <h3>📌 Grievance Details</h3>
+
+    <div class="form-group">
+      <label>Grievance Type</label>
+      <select required>
+        <option value="">-- Select Grievance Type --</option>
+        <option>Delay in Service</option>
+        <option>Officer Misconduct</option>
+        <option>Service Deficiency</option>
+        <option>Escalation of Unresolved Complaint</option>
+        <option>Policy / Administrative Issue</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Related Department (if any)</label>
+      <select>
+        <option>Not Applicable</option>
+        <option>Public Works Department</option>
+        <option>Water Supply Department</option>
+        <option>Electricity Department</option>
+        <option>Municipal Sanitation</option>
+        <option>Traffic Police</option>
+        <option>Fire & Emergency</option>
+        <option>Animal Control</option>
+        <option>Pollution Control Board</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Grievance Description</label>
+      <textarea rows="5" placeholder="Describe your grievance in detail" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Previous Complaint ID (if escalation)</label>
+      <input type="text" placeholder="Enter Complaint ID (optional)">
+    </div>
+
+    <h3>📍 Location Details</h3>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>State</label>
+        <input type="text" placeholder="State name" required>
+      </div>
+
+      <div class="form-group">
+        <label>District</label>
+        <input type="text" placeholder="District name" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Address / Area</label>
+      <input type="text" placeholder="Complete address / locality" required>
+    </div>
+
+    <div class="form-group">
+      <label>Upload Supporting Document (optional)</label>
+      <input type="file">
+    </div>
+
+    <p class="note">
+      ℹ Public grievances are reviewed by the Grievance Cell and routed to the
+      appropriate authority for action.
+    </p>
+
+    <button class="submit-btn">Submit Grievance</button>
+
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

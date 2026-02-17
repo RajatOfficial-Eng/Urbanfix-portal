@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animal Control Department | UrbanFix Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>🐾 Animal Control Department</h1>
+  <p>Stray animal management, animal welfare, and public safety</p>
+</section>
+
+<!-- ABOUT -->
+<section class="admin-section">
+  <h2>About the Department</h2>
+  <p>
+    The Animal Control Department is responsible for managing stray animals,
+    ensuring animal welfare, preventing animal-related public safety issues,
+    and responding to incidents involving injured, aggressive, or abandoned animals.
+    The department works in coordination with veterinary services and NGOs.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section class="admin-section">
+  <h2>Services & Responsibilities</h2>
+  <ul class="dept-list">
+    <li>Stray dog and animal complaint handling</li>
+    <li>Animal rescue and rehabilitation</li>
+    <li>Animal birth control (ABC) programs</li>
+    <li>Management of injured or sick animals</li>
+    <li>Public awareness on animal welfare and safety</li>
+  </ul>
+</section>
+
+<!-- STATISTICS -->
+<section class="stats">
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Total Complaints</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Resolved</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>In Progress</p>
+  </div>
+  <div class="stat-card">
+    <h2>0</h2>
+    <p>Pending</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="admin-section">
+  <h2>Department Contact Details</h2>
+
+  <table class="admin-table">
+    <tr>
+      <th>Head Officer</th>
+      <td>Dr. N. Malhotra</td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>animalcontrol@gov.in</td>
+    </tr>
+    <tr>
+      <th>Helpline</th>
+      <td>1962</td>
+    </tr>
+    <tr>
+      <th>Office Hours</th>
+      <td>Monday – Friday, 10:00 AM – 5:00 PM</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ACTION -->
+<section class="admin-section">
+  <a href="/register?type=animal" class="action-btn">
+    Register an Animal Control Complaint
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+</body>
+</html>

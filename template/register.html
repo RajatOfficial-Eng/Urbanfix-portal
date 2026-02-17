@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Complaint | UrbanFix Portal</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/register">Register Complaint</a></li>
+    <li><a href="/track">Track Status</a></li>
+    <li><a href="/departments">Departments</a></li>
+
+    <li>
+      {% if session.get("user") %}
+        <a href="/logout" class="logout-btn">Logout</a>
+      {% else %}
+        <a href="/login">Login</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>Register a New Complaint</h1>
+  <p>Please fill in the details below to submit your civic issue</p>
+</section>
+
+<!-- FORM -->
+<section class="form-section">
+<form class="complaint-form" action="/register" method="POST" enctype="multipart/form-data">
+
+  <!-- Citizen Details -->
+  <h3>👤 Citizen Details</h3>
+
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" name="name" required placeholder="Enter your full name">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Mobile Number</label>
+      <input type="tel" name="mobile" required placeholder="10-digit mobile number">
+    </div>
+
+    <div class="form-group">
+      <label>Alternate Mobile (optional)</label>
+      <input type="tel" name="alt_mobile" placeholder="Alternate mobile number">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Email (optional)</label>
+    <input type="email" name="email" placeholder="example@email.com">
+  </div>
+
+  <!-- Complaint Details -->
+  <h3>📌 Complaint Details</h3>
+
+  <div class="form-group">
+    <label>Complaint Category</label>
+    <select name="category" id="category" required>
+      <option value="">-- Select Category --</option>
+      <option value="Road & Pothole">Road & Pothole</option>
+      <option value="Water Supply">Water Supply & Leakage</option>
+      <option value="Street Light">Street Light</option>
+      <option value="Garbage">Garbage Collection</option>
+      <option value="Traffic">Traffic Signal</option>
+      <option value="Parking">Illegal Parking</option>
+      <option value="Fire">Fire Safety</option>
+      <option value="Animal">Stray Animal</option>
+      <option value="Pollution">Air / Noise Pollution</option>
+      <option value="Public Grievance">Public Grievance</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Complaint Description</label>
+    <textarea name="description" rows="4" required placeholder="Describe the issue in detail"></textarea>
+  </div>
+
+  <h3>📍 Location Details</h3>
+  <div class="form-row">
+      <div class="form-group">
+          <label>State / Union Territory</label>
+          <select required>
+          <option value="">-- Select State / UT --</option>
+          <option>Andhra Pradesh</option>
+          <option>Arunachal Pradesh</option>
+          <option>Assam</option>
+          <option>Bihar</option>
+          <option>Chhattisgarh</option>
+          <option>Goa</option>
+          <option>Gujarat</option>
+          <option>Haryana</option>
+          <option>Himachal Pradesh</option>
+          <option>Jharkhand</option>
+          <option>Karnataka</option>
+          <option>Kerala</option>
+          <option>Madhya Pradesh</option>
+          <option>Maharashtra</option>
+          <option>Manipur</option>
+          <option>Meghalaya</option>
+          <option>Mizoram</option>
+          <option>Nagaland</option>
+          <option>Odisha</option>
+          <option>Punjab</option>
+          <option>Rajasthan</option>
+          <option>Sikkim</option>
+          <option>Tamil Nadu</option>
+          <option>Telangana</option>
+          <option>Tripura</option>
+          <option>Uttar Pradesh</option>
+          <option>Uttarakhand</option>
+          <option>West Bengal</option>
+          <option>Andaman and Nicobar Islands</option>
+          <option>Chandigarh</option>
+          <option>Dadra and Nagar Haveli and Daman and Diu</option>
+          <option>Delhi</option>
+          <option>Jammu and Kashmir</option>
+          <option>Ladakh</option>
+          <option>Lakshadweep</option>
+          <option>Puducherry</option>
+          </select>
+      </div>
+
+      <div class="form-group">
+          <label>City / District</label>
+          <input type="text" name="city" required placeholder="City or District" >
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label>Area / Sector / Locality</label>
+        <input type="text" name="area" required placeholder="Locality / Sector / Ward" >
+    </div>
+    <div class="form-group">
+        <label>PIN Code</label>
+        <input type="text" id="pincode" maxlength="6" placeholder="Enter 6-digit PIN" required>
+    </div>
+
+
+    <div class="form-group">
+      <label>Upload Image (optional)</label>
+      <input type="file" accept="image/*" name="image">
+    </div>
+
+    <p class="note">
+      ℹ Complaint priority will be automatically determined based on severity, category, and location.
+    </p>
+
+    <button type="submit" class="submit-btn">Submit Complaint</button>
+
+    <p class="note">
+      🤖 Estimated Priority:
+      <strong>High</strong>
+    </p>
+    <button type="button" onclick="downloadPDF()" class="submit-btn">
+    Download Acknowledgment
+    </button>
+
+
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 UrbanFix Portal | Government of India</p>
+</footer>
+
+<!-- AUTO CATEGORY FROM URL -->
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type");
+  if (type) {
+    document.getElementById("category").value = type;
+  }
+</script>
+
+</body>
+</html>

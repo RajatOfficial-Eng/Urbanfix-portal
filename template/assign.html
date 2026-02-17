@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assign Complaints | UrbanFix Portal</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="/">🏛 UrbanFix Portal</a>
+  </div>
+  <ul>
+    <li><a href="/admin">Dashboard</a></li>
+    <li><a href="/assign" class="active">Assign Complaints</a></li>
+    <li><a href="/update-status">Update Status</a></li>
+    <li><a href="/reports">Reports</a></li>
+    <li><a href="/manage-departments">Manage Departments</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<section class="page-header">
+  <h1>Assign Complaints</h1>
+  <p>Allocate complaints to concerned departments or officers</p>
+</section>
+
+<!-- TABLE -->
+<section class="admin-section">
+<table class="admin-table">
+
+<thead>
+<tr>
+  <th>Complaint ID</th>
+  <th>Category</th>
+  <th>Priority</th>
+  <th>Location</th>
+  <th>Assign To</th>
+  <th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for c in complaints %}
+<tr>
+
+<td>{{ c.complaint_id }}</td>
+
+<td>{{ c.category | title }}</td>
+
+<td class="{{ c.priority | lower }}-text">
+  {{ c.priority }}
+</td>
+
+<td>{{ c.area or "Not specified" }}</td>
+
+<td>
+<form method="POST">
+
+<input type="hidden" name="complaint_id" value="{{ c.complaint_id }}">
+
+<select name="department" required>
+<option value="">Select Department</option>
+<option>Public Works Department</option>
+<option>Water Supply Department</option>
+<option>Municipal Sanitation</option>
+<option>Electricity Department</option>
+<option>Fire & Emergency</option>
+</select>
+
+</td>
+
+<td>
+
+{% if c.assigned_department %}
+<button class="action-btn small" disabled>Assigned</button>
+{% else %}
+<button type="submit" class="action-btn small">Assign</button>
+{% endif %}
+
+</form>
+
+</td>
+
+</tr>
+
+{% else %}
+<tr>
+<td colspan="6" style="text-align:center;">
+No complaints pending assignment
+</td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<p>© 2026 UrbanFix Portal | Authorized Government Use Only | Government of India</p>
+</footer>
+
+</body>
+</html>
