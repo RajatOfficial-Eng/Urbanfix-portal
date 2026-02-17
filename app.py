@@ -1,4 +1,3 @@
-from turtle import width
 from reportlab.graphics.barcode import qr, code128
 from reportlab.graphics.shapes import Drawing
 from reportlab.graphics import renderPDF
