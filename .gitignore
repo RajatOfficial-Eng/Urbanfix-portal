@@ -1,0 +1,8 @@
+Lib/
+Scripts/
+venv/
+__pycache__/
+database/
+uploads/
+exports/
+*.db
