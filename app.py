@@ -179,7 +179,7 @@ def login():
         if role == "Admin":
             return redirect("/admin")
         elif role == "Officer":
-            return redirect("/departments")
+            return redirect("/officer-dashboard")  # you can create this page later
         else:
             return redirect("/")
 
@@ -224,10 +224,43 @@ def signup():
 @app.route("/departments")
 def departments():
 
-    if session.get("role") not in ["Officer","Admin"]:
+    # ✅ Only citizens can access
+    if session.get("role") != "Citizen":
         return redirect("/login")
 
-    return render_template("departments.html")
+    # you can keep static OR dynamic
+    departments = Department.query.all()
+
+    return render_template(
+        "departments.html",
+        departments=departments
+    )
+
+
+@app.route("/officer-dashboard")
+def officer_dashboard():
+
+    # 🔒 Only Officer or Admin allowed
+    if session.get("role") not in ["Officer", "Admin"]:
+        return redirect("/login")
+
+    # 🔥 Show complaints assigned to departments
+    complaints = Complaint.query.filter(
+        Complaint.assigned_department != None
+    ).order_by(Complaint.created_at.desc()).all()
+
+    total = len(complaints)
+    resolved = Complaint.query.filter_by(status="Resolved").count()
+    in_progress = Complaint.query.filter_by(status="In Progress").count()
+
+    return render_template(
+        "officer-dashboard.html",
+        complaints=complaints,
+        total=total,
+        resolved=resolved,
+        in_progress=in_progress
+    )
+
 
 @app.route("/admin")
 def admin():
@@ -624,6 +657,44 @@ def update_status():
     return render_template("update-status.html", complaints=complaints)
 
     #return redirect(url_for("admin"))
+
+@app.route("/officer-update-status", methods=["GET", "POST"])
+def officer_update_status():
+
+    # 🔒 Only Officer allowed
+    if session.get("role") != "Officer":
+        return redirect("/login")
+
+    if request.method == "POST":
+
+        cid = request.form.get("complaint_id")
+        new_status = request.form.get("status")
+        remarks = request.form.get("remarks")
+
+        complaint = Complaint.query.filter_by(complaint_id=cid).first()
+
+        if complaint:
+            complaint.status = new_status
+
+            if new_status == "In Progress" and not complaint.in_progress_at:
+                complaint.in_progress_at = datetime.now()
+
+            elif new_status == "Resolved" and not complaint.resolved_at:
+                complaint.resolved_at = datetime.now()
+
+            db.session.commit()
+
+        return redirect("/officer-update-status")
+
+    # 🔥 THIS WAS MISSING → RETURN TEMPLATE
+    complaints = Complaint.query.filter(
+        Complaint.assigned_department.isnot(None)
+    ).all()
+
+    return render_template(
+        "officer-update-status.html",
+        complaints=complaints
+    )
 
 @app.route("/reports")
 def reports():

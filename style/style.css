@@ -630,3 +630,98 @@ footer {
   padding:6px 12px;
   border-radius:6px;
 }
+/* =========================
+   OFFICER UPDATE STATUS PAGE
+========================= */
+
+.officer-section{
+    width:95%;
+    margin:auto;
+    padding:40px 20px;
+}
+
+/* ===== TABLE ===== */
+.officer-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#ffffff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.08);
+}
+
+.officer-table thead{
+    background:#111827;
+    color:#ffffff;
+}
+
+.officer-table th{
+    padding:14px;
+    font-weight:600;
+    font-size:14px;
+}
+
+.officer-table td{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+    text-align:center;
+}
+
+.officer-table tr:hover{
+    background:#f8fafc;
+}
+
+/* ===== STATUS COLORS ===== */
+.status-Registered{
+    color:#6b7280;
+    font-weight:600;
+}
+
+.status-Assigned{
+    color:#2563eb;
+    font-weight:600;
+}
+
+.status-In\ Progress{
+    color:#f59e0b;
+    font-weight:600;
+}
+
+.status-Resolved{
+    color:#16a34a;
+    font-weight:600;
+}
+
+.status-Closed{
+    color:#ef4444;
+    font-weight:600;
+}
+
+/* ===== INPUTS ===== */
+.officer-table select,
+.officer-table input{
+    padding:6px 8px;
+    border-radius:6px;
+    border:1px solid #ddd;
+    outline:none;
+    font-size:13px;
+    font-family:Poppins, sans-serif;
+}
+
+/* ===== BUTTON ===== */
+.action-btn.small{
+    background:#0284c7;
+    color:#fff;
+    border:none;
+    padding:6px 14px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.action-btn.small:hover{
+    background:#0369a1;
+}
+

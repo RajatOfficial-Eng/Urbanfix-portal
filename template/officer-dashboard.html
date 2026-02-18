@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Officer Dashboard | UrbanFix</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo">
+<a href="/officer-dashboard">🏛 UrbanFix Portal</a>
+</div>
+
+<ul>
+<li><a href="/officer-dashboard" class="active">Dashboard</a></li>
+<li><a href="/officer-update-status">Update Status</a></li>
+<li>
+  {% if session.get("user") %}
+    <a href="/logout" class="logout-btn">Logout</a>
+  {% else %}
+    <a href="/login">Login</a>
+  {% endif %}
+</li>
+</ul>
+</nav>
+
+<section class="page-header">
+<h1>Officer Dashboard</h1>
+<p>Manage assigned complaints</p>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+<div class="stat-card">
+<h2>{{ total }}</h2>
+<p>Total Assigned</p>
+</div>
+
+<div class="stat-card">
+<h2>{{ in_progress }}</h2>
+<p>In Progress</p>
+</div>
+
+<div class="stat-card">
+<h2>{{ resolved }}</h2>
+<p>Resolved</p>
+</div>
+</section>
+
+<!-- TABLE -->
+<section class="admin-section">
+<table class="admin-table">
+
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Priority</th>
+<th>Location</th>
+<th>Status</th>
+<th>Department</th>
+</tr>
+
+{% for c in complaints %}
+<tr>
+<td>{{ c.complaint_id }}</td>
+<td>{{ c.category }}</td>
+<td>{{ c.priority }}</td>
+<td>{{ c.area or "Not Specified" }}</td>
+<td>{{ c.status }}</td>
+<td>{{ c.assigned_department }}</td>
+</tr>
+{% endfor %}
+
+</table>
+</section>
+
+</body>
+</html>
